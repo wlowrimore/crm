@@ -93,7 +93,7 @@ export default function AddUserForm() {
       if (signInResult?.error) {
         setError(signInResult.error);
       } else {
-        router.push("/");
+        router.push("/dashboard");
         router.refresh();
       }
     } catch (err) {
@@ -105,10 +105,10 @@ export default function AddUserForm() {
 
   return (
     <form onSubmit={handleSubmit} className="w-2/6 mx-auto p-32">
-      <div className="w-full flex justify-center">
-        <h1 className="text-4xl">Add New User</h1>
+      <div className="w-full flex justify-center px-6 py-3 bg-gradient-to-b from-blue-800 via-blue-950 to-transparent border-t-4 border-blue-950">
+        <h1 className="text-3xl">Add New User</h1>
       </div>
-      <div className="mt-6">
+      <div className="mt-12">
         <label htmlFor="name">Full Name</label>
         <input
           type="name"
@@ -185,11 +185,11 @@ export default function AddUserForm() {
         />
       </div>
       {error && <p className="text-red-500 mt-2">{error}</p>}
-      <div className="mt-12 flex items-center justify-center">
+      <div className="mt-6 flex items-center justify-center">
         <button
           type="submit"
           disabled={loading}
-          className="disabled:bg-neutral-300 hover:bg-blue-600 hover:text-white transition duration-200 w-full px-4 py-1 bg-sky-300 rounded text-2xl text-neutral-800 font-bold outline-black"
+          className="disabled:bg-neutral-300 hover:bg-blue-600 text-white transition duration-200 w-full px-4 py-1 bg-blue-800 rounded text-2xl outline-black"
         >
           {loading ? "Adding User..." : "Submit"}
         </button>

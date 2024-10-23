@@ -3,7 +3,7 @@ import LandingPage from "./components/LandingPage";
 
 export default function Home() {
   return (
-    <main className="container mx-auto p-12 flex flex-col">
+    <main className="container mx-auto flex flex-col">
       <LandingPage />
     </main>
   );

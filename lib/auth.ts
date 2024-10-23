@@ -3,7 +3,9 @@ import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import { compare } from "bcrypt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import { User } from "@prisma/client";
 import { db } from "../lib/db";
+import { AdapterUser } from "next-auth/adapters";
 
 export const {
   handlers: { GET, POST },
@@ -26,11 +28,19 @@ export const {
 
           const user = await db.user.findUnique({
             where: { email: credentials.email as string },
+            select: {
+              id: true,
+              email: true,
+              name: true,
+              password: true,
+              role: true,
+            },
           });
 
           console.log("Found user:", {
             userId: user?.id,
             hasPassword: !!user?.password,
+            role: user?.role,
           });
 
           if (!user || !user.password) {
@@ -55,6 +65,7 @@ export const {
             id: user.id,
             email: user.email,
             name: user.name,
+            role: user.role,
           };
         } catch (error) {
           console.error("Authentication error:", error);
@@ -67,7 +78,15 @@ export const {
     signIn: "/signIn",
   },
   callbacks: {
-    async session({ session, token, user }) {
+    async session({
+      session,
+      token,
+      user,
+    }: {
+      session: any;
+      token: any;
+      user: AdapterUser;
+    }) {
       console.log("Session Callback - BEFORE:", {
         originalSession: JSON.stringify(session),
         originalToken: JSON.stringify(token),
@@ -75,6 +94,7 @@ export const {
       });
       if (token && session.user) {
         session.user.id = token.id as string;
+        session.user.role = token.role as string;
       }
 
       console.log("Session Callback - AFTER:", {
@@ -91,8 +111,9 @@ export const {
         originalAccount: JSON.stringify(account),
       });
 
-      if (user) {
+      if (user && "role" in user) {
         token.id = user.id;
+        token.role = user.role;
       }
 
       console.log("JWT Callback - AFTER:", {

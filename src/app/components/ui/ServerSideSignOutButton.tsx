@@ -7,6 +7,7 @@ export default function ServerSideSignOutButton() {
         "use server";
         await signOut();
       }}
+      className="pt-4 pl-4"
     >
       <button className="text-red-400 hover:text-red-700 transition duration-200">
         Signout

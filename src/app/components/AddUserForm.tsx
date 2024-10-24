@@ -15,7 +15,8 @@ interface FormData {
   reEnteredPassword: string;
 }
 
-export default function AddUserForm() {
+export default function AddUserForm({ role }: { role: string }) {
+  console.log("AddUserForm", { role });
   const router = useRouter();
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -103,50 +104,55 @@ export default function AddUserForm() {
     }
   };
 
+  if (role !== "Admin") {
+    return null;
+  }
   return (
-    <form onSubmit={handleSubmit} className="w-2/6 mx-auto p-32">
+    <form
+      onSubmit={handleSubmit}
+      className="flex flex-col max-w-[92%] md:max-w-[40%] lg:max-w-[25%]"
+    >
       <div className="w-full flex justify-center px-6 py-3 bg-gradient-to-b from-blue-800 via-blue-950 to-transparent border-t-4 border-blue-950">
         <h1 className="text-3xl">Add New User</h1>
       </div>
       <div className="mt-12">
-        <label htmlFor="name">Full Name</label>
         <input
           type="name"
           id="name"
           name="name"
           value={formData.name}
           onChange={handleChange}
-          className="w-full px-2 py-1 rounded outline-none text-lg text-black bg-sky-100"
+          placeholder="Full Name"
+          className="p-1 w-full text-white bg-transparent border-b border-neutral-500 placeholder:font-[300] placeholder:text-neutral-500 focus:outline-none"
           required
         />
       </div>
       <div className="mt-6">
-        <label htmlFor="email">Email</label>
         <input
           type="email"
           id="email"
           name="email"
           value={formData.email}
           onChange={handleChange}
-          className="w-full px-2 py-1 rounded outline-none text-lg text-black bg-sky-100"
+          placeholder="Company Email"
+          className="p-1 w-full text-white bg-transparent border-b border-neutral-500 placeholder:font-[300] placeholder:text-neutral-500 focus:outline-none"
           required
         />
       </div>
       <div className="mt-6">
-        <label htmlFor="phone">Mobile Phone</label>
         <input
           type="text"
           id="phone"
           name="phone"
           value={formData.phone}
           onChange={handleChange}
-          className="w-full px-2 py-1 rounded outline-none text-lg text-black bg-sky-100"
+          placeholder="Office Phone"
+          className="p-1 w-full text-white bg-transparent border-b border-neutral-500 placeholder:font-[300] placeholder:text-neutral-500 focus:outline-none"
           required
         />
       </div>
 
       <div className="mt-6">
-        <label htmlFor="role">Role</label>
         <select
           id="role"
           name="role"
@@ -161,26 +167,26 @@ export default function AddUserForm() {
       </div>
 
       <div className="mt-6">
-        <label htmlFor="password">Password</label>
         <input
           type="password"
           id="password"
           name="password"
           value={formData.password}
           onChange={handleChange}
-          className="w-full px-2 py-1 rounded outline-none text-lg text-black bg-sky-100"
+          placeholder="Password"
+          className="p-1 w-full text-white bg-transparent border-b border-neutral-500 placeholder:font-[300] placeholder:text-neutral-500 focus:outline-none"
           required
         />
       </div>
       <div className="mt-6">
-        <label htmlFor="reEnteredPassword">Re-Enter Password</label>
         <input
           type="password"
           id="reEnteredPassword"
           name="reEnteredPassword"
           value={formData.reEnteredPassword}
           onChange={handleChange}
-          className="w-full px-2 py-1 rounded outline-none text-lg text-black bg-sky-100"
+          placeholder="Re-Enter Password"
+          className="p-1 w-full text-white bg-transparent border-b border-neutral-500 placeholder:font-[300] placeholder:text-neutral-500 focus:outline-none"
           required
         />
       </div>

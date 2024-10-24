@@ -3,7 +3,7 @@ import SiteLogo from "../../../../public/logos/zen-data.webp";
 
 const LandingTitle = () => {
   return (
-    <div className="px-4 flex flex-col justify-center">
+    <div className="">
       <Image
         src={SiteLogo}
         alt="Zen Data"
@@ -12,9 +12,6 @@ const LandingTitle = () => {
         className=""
         priority
       />
-      <h2 className="mx-auto text-xl tracking-wider">
-        Streamlined CRM For Your Business
-      </h2>
     </div>
   );
 };

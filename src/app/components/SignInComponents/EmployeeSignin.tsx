@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
-import ServerSideSignOutButton from "../ui/ServerSideSignOutButton";
+import ServerSideSignOutButton from "../ui/ClientSideSignOutButton";
 
 export default function EmployeeSignin() {
   const router = useRouter();

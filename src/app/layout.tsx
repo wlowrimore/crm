@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { SessionWrapper } from "./providers";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import ServerSideSignOutButton from "./components/ui/ServerSideSignOutButton";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -22,10 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <SessionWrapper>
-        <body className={inter.className}>
-          <ServerSideSignOutButton />
-          {children}
-        </body>
+        <body className={inter.className}>{children}</body>
       </SessionWrapper>
     </html>
   );

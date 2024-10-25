@@ -1,5 +1,5 @@
 import React from "react";
-import AddUserForm from "../components/AddUserForm";
+import AddUserForm from "../components/DashboardPageComponents/AddUserForm";
 
 const AddUserPage = () => {
   return <AddUserForm />;
